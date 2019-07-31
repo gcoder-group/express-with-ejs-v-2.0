@@ -1,0 +1,48 @@
+
+<!--slide bar menu end here-->
+<script>
+var toggle = true;
+            
+$(".sidebar-icon").click(function() {                
+  if (toggle)
+  {
+    $(".page-container").addClass("sidebar-collapsed").removeClass("sidebar-collapsed-back");
+    $("#menu span").css({"position":"absolute"});
+  }
+  else
+  {
+    $(".page-container").removeClass("sidebar-collapsed").addClass("sidebar-collapsed-back");
+    setTimeout(function() {
+      $("#menu span").css({"position":"relative"});
+    }, 400);
+  }               
+                toggle = !toggle;
+            });
+</script>
+<!--scrolling js-->
+<script src="<%= baseUrl %>javascripts/users/js/jquery.nicescroll.js"></script>
+<script src="<%= baseUrl %>javascripts/users/js/scripts.js"></script>
+		<!--//scrolling js-->
+<script src="<%= baseUrl %>javascripts/users/js/bootstrap.js"> </script>
+<!-- mother grid end here-->
+
+<script src="<%= baseUrl %>plugins/popper.js"></script> 
+<script type="text/javascript" src="<%= baseUrl %>plugins/summernote/summernote-bs4.js"></script>
+
+<script type="text/javascript" src="<%= baseUrl %>plugins/datatable/datatables.min.js"></script>
+<script>
+$('document').ready(function(){
+    $(document).ready( function () {
+        $('.myTable').DataTable();
+    });
+})
+</script>
+<script type="text/javascript">
+$(function() {
+    $('.summernote').summernote({
+        height: 200,
+    });
+});
+</script>
+<!--include sweetalert-->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>

@@ -1,2 +1,4 @@
-# express-with-ejs-v-2.0
-run command npm install
+# express-with-ejs
+
+Run the command npm install
+and npm start

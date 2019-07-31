@@ -1,0 +1,40 @@
+
+ 
+<div class="panel_main">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Create Page</div>
+            <div class="panel-body">
+                <% include ../../partials/notifications %>
+                <form class="form-horizontal" method="POST" action="/users/permission/" enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <a href="/users/permission" class="btn btn-warning" >Cancel</a>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="title" class="control-label">Name<span class="required">*</span></label>
+                            <input class="form-control" placeholder="" id="name" type="text" name="name" value="" required>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="title" class="control-label">Display Name<span class="required">*</span></label>
+                            <input class="form-control" placeholder="" id="display_name" type="text" name="display_name" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="title" class="control-label">Sort<span class="required"></span></label>
+                            <input class="form-control" placeholder="" id="sort" type="text" name="sort" value="">
+                        </div>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    
+</div>

@@ -1,0 +1,122 @@
+
+<div class="panel_main">
+    
+    <div class="clearfix"></div>
+    <div class="">
+        <div class="col-md-12">
+            <div class="panel panel-primary">
+                <div class="panel-heading">Pages</div>
+                <div class="panel-body">
+                <div class="actions-div">
+                    <a href="/admin/banner/create" class="btn btn-success">Add New</a>
+                </div>
+                <div class="clearfix"></div>
+                <%#include partials/notifications %>
+                    <input type="hidden" name="_csrf" value="{{csrfToken}}">
+                    <div class="table-responsive">
+                        <table class="table table-bordered">
+                            <thead>
+                                <tr>
+                                    <th>#</th>                                    
+                                    <th>Title</th>                                   
+                                    <th>Image</th>
+                                    <th>status</th>
+                                    <th>Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                           
+
+
+                                <% if (banners){ %>
+                                    
+
+                                    <% for(var i=0; i < banners.length; i++) { %>
+                                       <tr>
+                                         <td><%= data[i].id %></td>
+                                         <td><% if(data[i].banner_image){ %>
+                                            <img src="../uploads/<%= data[i].banner_image %>" height="100" width="100">    
+                                            <%  } %>
+                                        </td>
+                                        <td>
+                                            <%=data[i].banner_status %>
+                                        </td>
+                                        <td>
+                                            <a href="banner/<%= data[i]._id%>/edit" class=""><span class="label label-success">Edit</span></a>
+                                            <a href="javascript:void(0);" class="" id="delete" name="<%= data[i]._id%>"><span class="label label-danger">Delete</span></a>
+                                        </td>  
+                                       </tr>
+
+                                      
+                                    <% } %>
+                                <% }else{ %>
+                                    <tr>
+                                        <td colspan="7">No records found !</td>
+                                    </tr>
+                                <% } %>
+                                
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$('document').ready(function(){
+    $('body').on('click','#delete',function(){
+        var This = this;
+        var id = $(this).attr('name')
+        Swal.fire({
+          title: 'Are you sure?',
+          text: "You won't be able to revert this!",
+          type: 'warning',
+          showCancelButton: true,
+          confirmButtonColor: '#3085d6',
+          cancelButtonColor: '#d33',
+          confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+          if (result.value) {
+            $.ajax({
+            url: '/admin/banner/'+id,
+            type: 'DELETE',
+            data : {
+                _csrf : $('input[name="_csrf"]').val()
+            },
+            dataType: 'json',
+            success: function(response) {
+                
+                var messages = '<ul>';
+                $(response.messages).each(function(key,value){
+                    messages += '<li>'+value+'</li>';
+                })
+                messages += '</ul>';
+
+                if(response.status == 200){
+                    $(This).closest('tr').remove();
+                    Swal.fire(
+                        'Deleted!',
+                        messages,
+                        'success'
+                    )
+                }else{
+                    Swal.fire(
+                      'Errors!',
+                      '<b>Your file has been deleted.</b>',
+                      'error'
+                    )
+                }
+                
+            }
+        });
+
+            
+          }
+        })
+    })
+})
+
+</script>

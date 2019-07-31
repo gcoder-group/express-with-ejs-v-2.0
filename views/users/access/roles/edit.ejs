@@ -1,0 +1,99 @@
+
+ 
+<div class="panel_main">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Edit Permission</div>
+            <div class="panel-body">
+                <% include ../../partials/notifications %>
+                <form class="form-horizontal" method="post" action="/users/roles/<%=id%>?_method=put" enctype="multipart/form-data">
+
+                	<input type="hidden" name="_method" value="put">
+                    <input type="hidden" name="_csrf" value="<%=csrfToken%>">
+                    <div class="pull-right">
+                        <button type="submit" class="btn btn-success">Save</button>
+                        <a href="/users/roles" class="btn btn-warning" >Cancel</a>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="title" class="control-label">Name<span class="required">*</span></label>
+                            <input class="form-control" placeholder="" id="name" type="text" name="name" value="<%=doc.name%>" required>
+                        </div>
+                    </div>
+                    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="title" class="control-label">Associated Permissions <span class="required">*</span></label>
+                            <select class="form-control" id="associated_permissions" name="associated_permissions" >
+                                <option value="1" <% if(doc.all==1){%>selected<%}%>>All</option>
+                                <option value="0" <% if(doc.all==0){%>selected<%}%>>Custom</option>
+                            </select>
+                        </div>
+                        <div class="custom_permissions_div" style="<% if(doc.all==1){%>display:none<%}%>;">
+                        
+                        <% for(i=0;i< permissions.length;i++){
+                            var checked = ''
+                            for(j=0;j< permissions_role.length;j++){
+                               
+                                if(permissions_role[j].permission_id== permissions[i].id){
+                                
+                                
+                                    checked = 'checked'
+                                    break
+                                }
+                            }
+                            
+                            
+                        %>
+                        
+
+                            <div class="checkbox">
+                                <label>
+                                    <input type="checkbox" <%= checked %> name="custom_permissions" class="custom_permissions" value="<%= permissions[i].id %>"><%= permissions[i].name %>
+                                </label>
+                            </div>
+                        <%
+                            }
+                        %>
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="title" class="control-label">Sort<span class="required"></span></label>
+                            <input class="form-control" placeholder="" id="sort" type="text" name="sort" value="<%=doc.sort%>">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="title" class="control-label">Status<span class="required"></span></label>
+                            <br />
+                            <div class="radio-inline">
+                                <label>
+                                    <input class="" placeholder="" id="status" type="radio" checked name="status" value="1" <% if(doc.status==1){%>checked<%}%>> Active
+                                </label>
+                                <br />
+                                <label>
+                                    <input class="" placeholder="" id="status" type="radio" <% if(doc.status==0){%>checked<%}%> name="status" value="0"> Inactive
+                                </label>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </form>
+        </div>
+    </div>
+    <div class="clearfix"></div>
+    
+</div>
+
+<script>
+$('document').ready(function(){
+   $('body').on('change','#associated_permissions',function(){
+        if($(this).val()=='1'){
+            $('.custom_permissions_div').hide();
+        }else if($(this).val()== 0){
+            $('.custom_permissions_div').show();
+        }
+   }); 
+});
+</script>

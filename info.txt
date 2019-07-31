@@ -1,0 +1,28 @@
+npm install dotenv -s
+npm i async -s
+
+npm i body-parser -s 
+npm i methodOverride -s 
+npm i mongoose -s 
+npm i express-session -s 
+npm i passport -s 
+npm i connect-flash -s
+npm i express-validator -s
+npm i connect-mongo -s
+npm i express-fileupload -s
+npm i csurf -s
+npm i crypto -s
+npm i passport-local -s
+npm i nodemailer -s
+npm i express-fileupload -s
+
+admin details
+gouravnamdev100@gmail.com
+963852
+
+user  details
+testecove1@gmail.com
+ecove@123
+
+testecove@gmail.com
+123456

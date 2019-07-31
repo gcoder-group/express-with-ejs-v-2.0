@@ -1,0 +1,46 @@
+<!--header start here-->
+				<div class="header-main fixed">
+					<div class="header-left">
+							<div class="logo-name">
+							 	<a href="<%= baseUrl %>"> <img src="<% if (company_setting.length){%> <%= baseUrl %>uploads/<%= company_setting.company_logo %><% }else{ %><%= baseUrl %>images/logo.png<%} %>" ></a>
+								  						
+							</div>
+							
+						 </div>
+						 <div class="header-right">
+							
+							<!--notification menu end -->
+							<div class="profile_details">		
+								<ul>
+									<li class="dropdown profile_details_drop">
+										<a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+											<div class="profile_img">	
+												<span class="prfil-img"><img src="<% if(user.photo != null){  %>
+                                            	<%= baseUrl %>uploads/<%= user.photo %>
+                                            	<% } else{ %>
+                                            	<%= baseUrl %>images/default_avatar.jpg
+                                            	<% } %>" height="60" width="60"></span> 
+												<div class="user-name">
+													<p><%= user.name %></p>
+													<span><%= user.role %></span>
+												</div>
+												
+												<i class="fa fa-angle-down lnr"></i>
+												<i class="fa fa-angle-up lnr"></i>
+												<div class="clearfix"></div>	
+											</div>	
+										</a>
+										
+										<ul class="dropdown-menu drp-mnu">
+											<li> <a href="<%= baseUrl %>users/change_password"><i class="fa fa-cog"></i> Settings</a> </li> 
+											<li> <a href="<%= baseUrl %>users/profile"><i class="fa fa-user"></i> Profile</a> </li> 
+											<li> <a href="<%= baseUrl %>users/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
+										</ul>
+									</li>
+								</ul>
+							</div>
+							<div class="clearfix"> </div>				
+						</div>
+				     <div class="clearfix"> </div>	
+				</div>
+<!--heder end here-->

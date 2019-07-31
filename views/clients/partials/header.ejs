@@ -1,0 +1,37 @@
+<div class="header-main">
+                        
+                        <div class="logo-w3-agile">
+                            <h1><img src="<% if (company_setting.length){%> <%= baseUrl %>uploads/<%= company_setting.company_logo %><% }else{ %><%= baseUrl %>images/logo.png<%} %>" ></h1>
+                        </div>
+                      
+                        <div class="profile_details w3l">
+                            <ul>
+                                <li class="dropdown profile_details_drop">
+                                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                        <div class="profile_img">	
+                                            <span class="prfil-img"><img src="<% if(user.photo != null){  %>
+                                            <%= baseUrl %>uploads/<%= user.photo %>
+                                            <% } else{ %>
+                                            <%= baseUrl %>images/default_avatar.jpg
+                                            <% } %>" >
+                                            </span> 
+                                            <div class="user-name">
+                                                <p><%=user.name %></p>
+                                                <span><%=user.user_type %></span>
+                                            </div>
+                                            <i class="fa fa-angle-down"></i>
+                                            <i class="fa fa-angle-up"></i>
+                                            <div class="clearfix"></div>	
+                                        </div>	
+                                    </a>
+                                    <ul class="dropdown-menu drp-mnu">
+                                        <li> <a href="<%= baseUrl  %>clients/change_password"><i class="fa fa-cog"></i> Settings</a> </li> 
+                                        <li> <a href="<%= baseUrl  %>clients/profile"><i class="fa fa-user"></i> Profile</a> </li> 
+                                        <li> <a href="<%= baseUrl  %>clients/logout"><i class="fa fa-sign-out"></i> Logout</a> </li>
+                                    </ul>
+                                </li>
+                            </ul>
+                        </div>
+
+                        <div class="clearfix"> </div>	
+                    </div>

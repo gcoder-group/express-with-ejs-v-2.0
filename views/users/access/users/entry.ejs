@@ -1,0 +1,244 @@
+<div class="panel_main">
+    <div class="col-md-12">
+        <div class="panel panel-primary">
+            <div class="panel-heading">Create User</div>
+            <div class="panel-body">
+                <% include ../../partials/notifications %>
+                <div class="pull-right">
+                    <button type="submit" class="btn btn-success">Save</button>
+                    <a href="/users/user" class="btn btn-warning" >Cancel</a>
+                </div>
+                <div class="col-md-8 col-md-offset-1">
+                <form class="form-horizontal" method="post" id="create_user" action="/users/user" enctype="multipart/form-data">
+                    <input type="hidden" name="_csrf" value="<%=csrfToken %>">
+                    
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="name" class="control-label">Name<span class="required">*</span></label>
+                            <input class="form-control" placeholder="" id="name" type="text" name="name" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="email" class="control-label">Email address<span class="required">*</span></label>
+                            <input class="form-control" placeholder="" id="email" type="email" name="email" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="password" class="control-label">New Password<span class="required">*</span></label>
+                            <input class="form-control" placeholder="" id="password" type="password" name="password" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="password" class="control-label">Confirm Password<span class="required">*</span></label>
+                            <input class="form-control" placeholder="" id="conf_password" type="password" name="conf_password" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="mobile" class="control-label ">Mobile<span class="required">*</span></label>
+                            <input class="form-control" placeholder="" id="mobile" type="text" name="mobile" value="">
+                        </div>
+                    </div>
+                     <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="dob" class="control-label ">DOB</label>
+                            <input class="form-control datepicker" placeholder="" id="dob" type="text" readonly name="dob" value="">
+                        </div>
+                    </div>
+                     <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="address" class="control-label ">Address</label>
+                            <input class="form-control" placeholder="" id="address" type="text" name="address" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="city" class="control-label ">City</label>
+                            <input class="form-control" placeholder="" id="city" type="text" name="city" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="state" class="control-label ">State</label>
+                            <input class="form-control" placeholder="" id="state" type="text" name="state" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="country" class="control-label ">Country</label>
+                            <input class="form-control" placeholder="" id="country" type="text" name="country" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="zip" class="control-label ">Zip Code</label>
+                            <input class="form-control" placeholder="" id="zip" type="text" name="zip" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="photo" class="control-label ">Image Upload</label>
+                            <input class="form-control" placeholder="" id="photo" type="file" name="photo" value="">
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="photo" class="control-label ">Status </label>
+                            <div class="checkbox">
+                                <label>
+                                    Active <input type="checkbox" name="status" class="status" value="">
+                                </label>
+                            </div>   
+                        </div>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="form-group">
+                            <label for="photo" class="control-label ">Associated Roles </label>
+                            <%
+                                for(i=0;i< roles.length;i++){
+                                var checked = ''
+                                if(roles[i]._id==role_user_id){
+                                    checked = 'checked'
+                                }
+                            %>
+                                <div class="radio">
+                                    <label>
+                                        <input type="radio" <%= checked %> name="associated_roles" class="associated_roles" value="<%= roles[i].id %>"><%= roles[i].name %>
+                                    </label><a href="javascript:void(0);" class="toggle_permissions"> (<span class="show_hide_permissions">Show</span> Permissions)</a>
+                                
+                                    <blockquote class="small" style="display:none">
+                                    <ul class="permissions_list blockquote">
+                                    <% 
+                                        if(roles[i].all==0){ //custom permissions
+                                            if(permission_role.length){
+                                                for(j=0;j<permission_role.length;j++){
+                                                    if(permission_role[j].role_id == roles[i].id){
+                                        %>
+                                                <li><%= permission_role[j].permission_id.name %></li>
+                                        <%             
+                                                    }
+                                              
+                                                }
+                                        %>
+
+                                        <%
+                                            }
+                                        }else{
+                                            %>All Permissions<%
+                                        }
+                                    %>   
+                                    </ul>
+                                    </blockquote>
+                                </div>
+                            <%
+                                }
+                            %>  
+                        </div>
+                    </div>
+
+                        
+                    
+                    
+                    
+				</div>
+            </form>
+        </div>
+    </div>
+    
+    <div class="clearfix"></div>
+    
+</div>
+
+<script>
+$(function() {
+    $("form#create_user").validate({
+    rules: {
+        name:{
+            required:true,
+            minlength:3,
+            maxlength:18,
+            lettersonly: true
+        },
+        mobile: {
+            required: true,
+            number: true,
+            minlength: 10,
+            maxlength:14
+        },
+        password:{
+            required:true,
+            minlength:6,
+            maxlength:32,
+        },
+        conf_password:{
+            required:true,
+            minlength:6,
+            maxlength:32,
+            equalTo : 'password',
+        },
+        state:{
+            required:true,
+            minlength:3,
+            maxlength:32,
+            lettersonly: true
+
+        },
+        country:{
+            required:true,
+            minlength:3,
+            maxlength:32,
+            lettersonly: true
+        },
+    },
+    messages: {
+        name:{
+            required: "Please provide a name",
+            minlength: "Your name must be at least 3 characters long",
+            maxlength: "Your name must be less than 32 characters long"
+        },
+        mobile: {
+            required: "Please provide a mobile number",
+            minlength: "Your mobile must be at least 10 characters long",
+            maxlength: "Your mobile must be less than 14 characters long"
+        },
+        password:{
+            required: "Please provide a password",
+            minlength: "Your password must be at least 3 characters long",
+            maxlength: "Your password must be less than 32 characters long"
+        },
+        state:{
+            required: "Please provide a state",
+            minlength: "Your name must be at least 3 characters long",
+            maxlength: "Your name must be less than 32 characters long"
+        },
+        country:{
+            required: "Please provide a country",
+            minlength: "Your name must be at least 3 characters long",
+            maxlength: "Your name must be less than 32 characters long"
+       },
+     },
+    submitHandler: function(form) {
+         form.submit();
+    }
+  });
+  
+    $.validator.addMethod("lettersonly", function(value, element) {
+      return this.optional(element) || /^[a-zA-Z\s]+$/i.test(value);
+    }, "Letters only please"); 
+});
+
+$('document').ready(function(){
+    $('body').on('click','.toggle_permissions',function(){
+        $(this).closest('div.radio').find('blockquote').toggle()
+        if($(this).find('.show_hide_permissions').text()=='Show'){
+            $(this).find('.show_hide_permissions').text('Hide')
+        }else{
+            $(this).find('.show_hide_permissions').text('Show')
+        }
+    })
+});
+
+</script>   

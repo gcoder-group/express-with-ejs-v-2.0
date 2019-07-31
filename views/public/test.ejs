@@ -1,0 +1,36 @@
+<% var scale_text = scale_image = 'free_transform'; %>
+
+<%=  scale_text %>
+
+<% 
+var i = 0; 
+
+var data = [
+    { id: 1, name: "bob" },
+    { id: 2, name: "john" },
+    { id: 3, name: "jake" },
+];
+
+
+
+
+%>
+
+
+
+<table>
+<% for(var i=0; i < data.length; i++) { %>
+   <tr>
+     <td><%= data[i].id %></td>
+     <td><%= data[i].name %></td>
+   </tr>
+<% } %>
+</table>
+
+<%# comment %>
+
+<% if(true){ %>
+   <h1>foo</h1>
+ <% } else{ %>  
+   <h1>bar</h1>
+<% } %>

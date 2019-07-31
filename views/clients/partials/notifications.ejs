@@ -1,0 +1,25 @@
+<% if(errorMsg.length){ %>
+	<div class="alert alert-danger alert-dismissible fade in alertCloseArea" role="alert">	
+    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		<span aria-hidden="true">×</span>
+    	</button>
+    	<% for(var i=0; i < errorMsg.length; i++) { %>
+           <%= errorMsg[i] %><br/>
+        <% } %>
+    </div>
+    
+    
+    
+<% } %>
+
+<% if(successMsg.length){ %>
+	
+    <div class="alert alert-success alert-dismissible fade in alertCloseArea" role="alert">	
+    	<button type="button" class="close" data-dismiss="alert" aria-label="Close">
+    		<span aria-hidden="true">×</span>
+    	</button>
+    	<%= successMsg %>
+    </div>
+    
+    
+<% } %>

@@ -1,0 +1,143 @@
+    <br />
+  
+		<div class="grid-form">
+ 		<div class="grid-form1">
+
+    
+
+    <div class="row">
+        <% include partials/notifications %>
+        <div class="col-md-3">
+                <form id="upload_profile" action="?_csrf=<%=csrfToken %>" method="POST" enctype="multipart/form-data">
+                <img src="<% if(u_data.photo){  %><%= baseUrl %>uploads/<%=u_data.photo %><% }else{ %> <%= baseUrl %>images/default_avatar.jpg<% } %>" height="100" width="100"> 
+                    <div class="form-group">
+                    
+                      <label>Upload <input type="file" class="form-control" name="photo" id="exampleInputPhoto" placeholder="Photo" style="display:none"></label>
+                  </div>
+                
+                </form>
+            </div>
+    
+        <div class="col-md-9">
+          <form action="?_csrf=<%=csrfToken %>" method="POST" id="upload_data_profile">
+              
+            
+              <div class="form-group">
+                <label for="exampleInputName">Name</label>
+                <input type="text" class="form-control" name="name" id="exampleInputName" placeholder="Name" value="<% if( u_data.name){  %><%= u_data.name  %><% } %>">
+              </div>
+            
+              <div class="form-group">
+                <label for="exampleInputEmail">Email address</label>
+                <input type="email" class="form-control" name="email" id="exampleInputEmail" placeholder="Email address" value="<% if( u_data.email){  %><%= u_data.email  %><% } %>">
+              </div>
+            
+              <div class="form-group">
+                <label for="exampleInputMobile">Mobile</label>
+                <input type="text" class="form-control" name="mobile" id="exampleInputMobile" placeholder="Mobile" value="<% if( u_data.mobile){  %><%= u_data.mobile  %><% } %>">
+              </div>
+            
+              <div class="form-group">
+                <label for="exampleInputDOB">DOB</label>
+                <input type="date" class="form-control" name="dob" id="exampleInputDOB" placeholder="DOB" value="<% if( u_data.dob){  %><%= u_data.dob  %><% } %>">
+              </div>
+            
+              <div class="form-group">
+                <label for="exampleInputAddress">Address</label>
+                <input type="text" class="form-control" name="address" id="exampleInputAddress" placeholder="Address" value="<% if( u_data.address){  %><%= u_data.address  %><% } %>">
+              </div>
+            
+              <div class="form-group">
+                <label for="exampleInputCity">City</label>
+                <input type="text" class="form-control" name="city" id="exampleInputCity" placeholder="City" value="<% if( u_data.city){  %><%= u_data.city  %><% } %>">
+              </div>
+            
+              <div class="form-group">
+                <label for="exampleInputState">State</label>
+                <input type="text" class="form-control" name="state" id="exampleInputState" placeholder="State" value="<% if( u_data.state){  %><%= u_data.state  %><% } %>">
+              </div>
+            
+             <div class="form-group">
+                <label for="exampleInputCountry">Country</label>
+                <input type="text" class="form-control" name="country" id="exampleInputCountry" placeholder="Country" value="<% if( u_data.country){  %><%= u_data.country  %><% } %>">
+              </div>
+            
+             <div class="form-group">
+                <label for="exampleInputZip">Zip Code</label>
+                <input type="text" class="form-control" name="zip" id="exampleInputZip" placeholder="Zip Code" value="<% if( u_data.zip){  %><%= u_data.zip  %><% } %>">
+              </div>
+              
+              <button type="submit" class="btn btn-default">Submit</button>
+          </form>
+        </div>
+
+    </div>
+</div>
+</div>
+
+<script>
+$(function() {
+    $("form#upload_data_profile").validate({
+    rules: {
+      name:{
+        required:true,
+        minlength:3,
+        maxlength:32,
+        //lettersonly: true
+      },
+      mobile: {
+        required: true,
+        number: true,
+        minlength: 10,
+        maxlength:14
+      },
+       state:{
+        required:true,
+        minlength:3,
+        maxlength:32,
+        lettersonly: true
+        
+      },
+      country:{
+        required:true,
+        minlength:3,
+        maxlength:32,
+        lettersonly: true
+      },
+    },
+     messages: {
+        name:{
+        required: "Please provide a name",
+        minlength: "Your name must be at least 3 characters long",
+        maxlength: "Your name must be less than 32 characters long"
+       },
+        mobile: {
+        required: "Please provide a mobile number",
+        minlength: "Your password must be at least 10 characters long",
+        maxlength: "Your password must be less than 14 characters long"
+        },
+          state:{
+        required: "Please provide a state",
+        minlength: "Your name must be at least 3 characters long",
+        maxlength: "Your name must be less than 32 characters long"
+       },
+         country:{
+        required: "Please provide a country",
+        minlength: "Your name must be at least 3 characters long",
+        maxlength: "Your name must be less than 32 characters long"
+       },
+     },
+    submitHandler: function(form) {
+         form.submit();
+    }
+  });
+  
+  $.validator.addMethod("lettersonly", function(value, element) {
+  return this.optional(element) || /^[a-z]+$/i.test(value);
+}, "Letters only please"); 
+});
+  
+    $(document).on('change', 'input[type=file]', function(){
+        $('#upload_profile').submit();
+    });
+</script>   

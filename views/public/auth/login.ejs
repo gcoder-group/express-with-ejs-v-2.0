@@ -1,0 +1,96 @@
+<script src='https://www.google.com/recaptcha/api.js'></script>
+<!-- inner pages start --> 
+<div class="inner_all_pages loginbg">
+  <div class="container">
+    <div class="row">
+      <div class="users">
+        <div class=">
+          <div class="logIn">
+            <h2> <span>Log in</span></h2>
+          </div>
+          <div class="loginouter">
+              <div class="login-form">
+
+                <% include ../partials/notifications %>
+
+                <form method="post" action="" id="loginForm">
+                  <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                  <div class="row">
+                    <div class="col-md-8">
+                      <div class="form-group required" aria-required="true">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fas fa-user"></i></span>
+                          <input name="email" class="form-control" placeholder="Email" id="email" required="required" aria-required="true" type="text">
+                        </div>
+                      </div>
+                    </div>
+                    <div class="col-md-8">
+                      <div class="form-group required" aria-required="true">
+                        <div class="input-group">
+                          <span class="input-group-addon"><i class="fas fa-lock"></i></span>
+                          <input name="password" class="form-control" placeholder="Password" id="password" required="required" aria-required="true" type="password">
+                        </div>
+                      </div>
+                    </div>
+                  
+                    <div class="col-md-8">
+                      <div class="form-group required" aria-required="true">
+                        <div class="input-group">
+                          <% if (captcha_at_login){ %>
+                                  <div class="g-recaptcha" data-sitekey="<%# RECAPTCHA_SITE_KEY %>" ></div>
+                                <% } %>
+                        </div>
+                      </div>
+                    </div>
+                      <div class="clearfix"></div>
+                      
+                    <div class="col-md-8">
+                      <div class="form-group">
+                        <button class="btn btnTheme"  type="submit">Sign in</button> 
+                      </div>
+                    </div>
+                    <div class="col-md-12 col-sm-12 col-md-8">
+                      <div class="form-group links">
+                        Don't have account <a href="<%= baseUrl %>auth/register">Click Here</a> <a class="forgot-password " href="<%= baseUrl %>auth/forgot">Forgot password?</a>
+                      </div>
+                    </div>
+                  </div>
+                </form>
+              </div>
+           
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</div>
+
+
+<script>
+$('#document').ready(function(){
+  $("#loginForm").validate({
+        ignore: [],
+        rules: {
+            "g-recaptcha-response": {
+                required: !0,
+                
+            }
+        },
+        messages: {
+           
+            "g-recaptcha-response": {
+                required: "Please click on the reCAPTCHA box.",
+            }
+        },
+        submitHandler: function(e) {
+      if (grecaptcha.getResponse()) {
+                e.submit();
+            } else {
+                alert('Please confirm captcha to proceed')
+            }
+        }
+    });
+
+})
+</script>
